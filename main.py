@@ -15,9 +15,9 @@ import click
                                                   'mode.')
 @click.option('--value', '-v', help='The original digest value')
 def main(file, mode, value):
-    click.echo('UR file is: {}'.format(file))
-    click.echo('UR mode is: {}'.format(mode))
-    click.echo('UR orginal digest result is: {}'.format(value))
+    click.echo('FILE: {}'.format(file))
+    click.echo('MODE: {}'.format(mode))
+    click.echo('DIGEST: {}'.format(value))
     if not value:
         click.echo('Use -v/--value to upload a original digest result!!!')
         return
@@ -29,7 +29,7 @@ def main(file, mode, value):
     if not os.path.isabs(file):
         file = os.path.abspath(file)
     if not os.path.exists(file):
-        click.echo('seems not exists this file!!!')
+        click.echo('Seems this file is not exists!!!')
         return
     if not os.path.isfile(file):
         click.echo('Not a file!!!')
@@ -54,13 +54,11 @@ def main(file, mode, value):
     rv = mode_.hexdigest()
 
     click.echo('--' * 20)
-    click.echo('The current digest mode is {}'.format(mode))
-    click.echo('Your digest result is {}'.format(rv))
-    click.echo('The original digest result is {}'.format(value))
-    if rv == value:
+    click.echo('RESULT: {}'.format(rv))
+    if rv.lower() == value.lower():
         click.echo('\nCHECK PASSED!!! SAFE FILE!!!')
     else:
-        click.echo('\nWRONG!!! THE FILE IS NOT THE ORIGINAL FILE!!!')
+        click.echo('\nWRONG!!! THIS FILE HAS BEEN CHANGED BY SOMEONE!!!')
     return mode_.hexdigest()
 
 
