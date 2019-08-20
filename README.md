@@ -1,9 +1,9 @@
-### Info:
-这是一个检查文件校验码是否正确的脚本
+### 简介:
+这是一个计算/校验文件哈希值的脚本
 
 
 ### Required:
-click，python3
+python3，click
 
 
 ### How to Use 1：
@@ -18,15 +18,11 @@ alias 一个命令(.bashrc, .zshrc, .bash_profile...)
 之后就可以在终端里使用 \<command> 去使用此脚本
 
 
-### Attention：
-所选 python 可执行性文件的环境里需要包含 click 包
-
-
 ### Options：
---help 查看说明信息
+--help 查看帮助信息
 
 -f, --file \<TEXT>   需要校验的文件路径
 
 -m, --mode \<TEXT>   校验模式 [1:md5, 2:sha1, 3:sha256]，默认为 **md5**
 
--v, --value \<TEXT>  原始文件的校验值
+-v, --value \<TEXT>  原始文件的校验值。如果不使用此参数会只计算哈希值。
