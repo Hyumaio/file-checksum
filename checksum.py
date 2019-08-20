@@ -1,5 +1,4 @@
 # @Created Time: 2019.07.16
-# @Lately Changed: 2019.07.16
 # @author: hyumaio
 
 import hashlib
@@ -10,14 +9,11 @@ import click
 
 @click.command()
 @click.option('--file', '-f', help='Choose a file, use ABSOLUTE file path.', )
-@click.option('--mode', '-m', default='md5', help='Choose a mode from [1:md5, 2:sha1, 3:sha256], if not choose, "md5" will be the default '
-                                                  'digest '
-                                                  'mode.')
+@click.option('--mode', '-m', default='MD5', help='Choose a mode from [1:MD5, 2:SHA1, 3:SHA256], if not choose, "MD5" will be the default digest mode.')
 @click.option('--value', '-v', help='The original digest value')
 def main(file, mode, value):
-    click.echo('FILE: {}'.format(file))
-    click.echo('MODE: {}'.format(mode))
-    click.echo('DIGEST: {}'.format(value))
+    # 比较文件的哈希值是否与给出的哈希值一致，即校验文件是否是源文件
+
     if not value:
         click.echo('Use -v/--value to upload a original digest result!!!')
         return
@@ -35,14 +31,14 @@ def main(file, mode, value):
         click.echo('Not a file!!!')
         return
 
-    if mode == '1' or mode == 'md5' or mode == 1:
-        mode = 'md5'
+    if mode == '1' or mode.upper() == 'MD5' or mode == 1:
+        mode = 'MD5'
         mode_ = hashlib.md5()
-    elif mode == '2' or mode == 'sha1' or mode == 2:
-        mode = 'sha1'
+    elif mode == '2' or mode.upper() == 'SHA1' or mode == 2:
+        mode = 'SHA1'
         mode_ = hashlib.sha1()
-    elif mode == '3' or mode == 'sha256' or mode == 3:
-        mode = 'sha256'
+    elif mode == '3' or mode.upper() == 'SHA256' or mode == 3:
+        mode = 'SHA256'
         mode_ = hashlib.sha256()
     else:
         click.echo('NOT A INVALID MODE')
@@ -53,13 +49,19 @@ def main(file, mode, value):
 
     rv = mode_.hexdigest()
 
-    click.echo('--' * 20)
+    click.echo('--' * 40)
+    click.echo('FILE: {}'.format(file))
+    click.echo('MODE: {}'.format(mode))
+    click.echo('DIGEST: {}'.format(value))
+    click.echo('--' * 40)
     click.echo('RESULT: {}'.format(rv))
+    click.echo('--' * 40)
+
     if rv.lower() == value.lower():
         click.echo('\nCHECK PASSED!!! SAFE FILE!!!')
     else:
         click.echo('\nWRONG!!! THIS FILE HAS BEEN CHANGED BY SOMEONE!!!')
-    return mode_.hexdigest()
+    return rv
 
 
 if __name__ == '__main__':
