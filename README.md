@@ -4,7 +4,7 @@
 
 ### Required:
 - python3
-    - click
+- click
 
 
 ### How to Use 1：
