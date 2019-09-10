@@ -1,9 +1,10 @@
-### 简介:
-这是一个计算/校验文件哈希值的脚本
+### Introduction:
+计算/校验文件哈希值，支持 md5, sha1, sha256
 
 
 ### Required:
-python3，click
+- python3
+    - click
 
 
 ### How to Use 1：
